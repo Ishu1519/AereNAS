@@ -102,7 +102,10 @@ class WebDavServer(
 
         sb.append("</D:multistatus>")
         return newFixedLengthResponse(
-            Response.Status.lookup(207) ?: Response.Status.OK
+            object : Response.IStatus {
+    		override fun getDescription() = "207 Multi-Status"
+    		override fun getRequestStatus() = 207
+		}
             "application/xml; charset=utf-8",
             sb.toString()
         ).apply {
@@ -231,7 +234,12 @@ class WebDavServer(
     // ── MKCOL ─────────────────────────────────────────────────────────────────
 
     private fun handleMkcol(file: File): Response {
-        if (file.exists()) return newFixedLengthResponse(Response.Status.lookup(405) ?: Response.Status.METHOD_NOT_ALLOWED"), "text/plain", "Already exists")
+        if (file.exists()) return newFixedLengthResponse(
+	   object : Response.IStatus {
+    		override fun getDescription() = "405 Method Not Allowed"
+    		override fun getRequestStatus() = 405
+	   }", "text/plain", "Already exists"
+	)
         return if (file.mkdirs()) {
             newFixedLengthResponse(Response.Status.CREATED, "text/plain", "")
         } else {
