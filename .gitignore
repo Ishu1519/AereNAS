@@ -1,0 +1,33 @@
+# Android
+android/.gradle/
+android/local.properties
+android/app/build/
+android/build/
+android/**/*.apk
+android/**/*.aab
+android/**/*.ap_
+android/**/*.class
+android/**/bin/
+android/**/gen/
+android/**/out/
+*.keystore
+!debug.keystore
+
+# Windows / .NET
+windows/**/bin/
+windows/**/obj/
+windows/**/publish/
+*.user
+*.suo
+.vs/
+
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# IDE
+.idea/
+*.iml
+.vscode/settings.json
