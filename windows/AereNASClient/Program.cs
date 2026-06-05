@@ -376,8 +376,14 @@ auto_connect={AutoConnect.ToString().ToLower()}
             Application.Exit();
         }
 
-        private void SetTrayText(string text) =>
-            _tray.Invoke(() => _tray.Text = text[..Math.Min(text.Length, 63)]);
+        private void SetTrayText(string text)
+        {
+            var truncated = text[..Math.Min(text.Length, 63)];
+            if (_tray.ContextMenuStrip?.InvokeRequired == true)
+                _tray.ContextMenuStrip.Invoke((Action)(() => _tray.Text = truncated));
+            else
+                _tray.Text = truncated;
+        }
 
         private void Log(string msg) =>
             Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {msg}");

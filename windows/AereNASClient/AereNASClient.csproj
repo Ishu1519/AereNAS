@@ -19,5 +19,7 @@
     <!-- ZXing for QR parsing -->
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
     <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.9" />
+    <!-- ServiceController for WebClient service management -->
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
   </ItemGroup>
 </Project>
